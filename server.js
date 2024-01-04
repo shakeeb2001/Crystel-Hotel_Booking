@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
         io.emit('new-event-notification', event);
     });
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        console.log('Use disconnected');
     });
 });
 
