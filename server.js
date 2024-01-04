@@ -23,6 +23,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const server = http.createServer(app);
 const io = socketIO(server);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 io.on('connection', (socket) => {
     console.log('A user connected');
