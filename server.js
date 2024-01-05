@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require('http'); 
-const bodyParser = require('body-parser');
 const multer = require('multer');
 const SignupModel = require('./models/signupmodel');
 const EventModel = require('./models/eventcardmodel');
@@ -11,7 +10,8 @@ const BookingModel = require('./models/bookinghistrotymodel');
 const socketIO = require('socket.io');
 
 
-const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
 const URI = "mongodb+srv://shakeeb:226284@mycluster.hitx68p.mongodb.net/Cyrstal-Cascade?retryWrites=true&w=majority";
@@ -24,8 +24,6 @@ const upload = multer({ storage: storage });
 const server = http.createServer(app);
 const io = socketIO(server);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 io.on('connection', (socket) => {
     console.log('A user connected');
